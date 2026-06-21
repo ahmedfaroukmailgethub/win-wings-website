@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations – WIN WINGS</title>
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+
+<!-- Hidden SVG filter: knocks out white bg → transparent, recolours logo to white -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="ww-knockout" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+               -4 -4 -4 0 11"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="3" intercept="-0.1"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <a href="index.html"><img src="WW-Logo (3).jpg" alt="WIN WINGS Logo" /></a>
+    <a href="index.html" class="nav-brand">WIN <span>WINGS</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="why-us.html">Why Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu(this)"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════ PAGE HEADER ═══════════════ -->
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-content">
+    <div class="section-tag">Core Operations <span class="section-tag-plane">✈</span></div>
+    <h1>How We <span>Operate</span> <img class="hero-wings header-wings" src="Wings-Logo.jpg" alt="WIN WINGS wings" /></h1>
+    <p>Every mission-critical function is fully managed in-house — from kitchen production to aircraft delivery — ensuring quality, compliance and reliability on every flight.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ OPERATIONS ═══════════════ -->
+<section class="operations" id="operations">
+  <div class="ops-header fade-up">
+    <div class="section-tag">All Functions In-House <span class="section-tag-plane">✈</span></div>
+    <h2>All <span style="color: var(--gold)">Mission-Critical</span> Functions</h2>
+    <p>Every core function is fully controlled and managed in-house to ensure quality, compliance, and operational reliability on every flight.</p>
+  </div>
+
+  <!-- Animated Runway -->
+  <div class="runway-wrap">
+    <div class="runway-line"></div>
+    <div class="runway-dashes"></div>
+    <div class="runway-plane">
+      <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="#c8a85a"/>
+        <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="#c8a85a"/>
+        <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="#c8a85a"/>
+        <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="#c8a85a"/>
+        <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="#c8a85a"/>
+        <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="#c8a85a"/>
+        <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="#c8a85a"/>
+        <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(180,140,60,0.6)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ops-grid">
+    <div class="op-item fade-up">
+      <div class="op-icon">🍽️</div>
+      <h4>Food Production</h4>
+      <p>Full in-house kitchen production meeting aviation-specific food safety standards.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon">🔬</div>
+      <h4>Quality Control & Food Safety</h4>
+      <p>Continuous quality checks and HACCP compliance throughout the production chain.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon">📦</div>
+      <h4>Procurement & Supply</h4>
+      <p>Supplier management and ingredient procurement with full traceability.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon"><svg viewBox="0 0 300 150" style="width:42px;height:auto" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="8" width="150" height="56" rx="5" fill="#1a3a5c"/>
+        <path d="M164,22 L214,30 L214,50 L164,54 Z" fill="#1a3a5c"/>
+        <path d="M52,64 L120,112" stroke="#1a3a5c" stroke-width="8" stroke-linecap="round"/>
+        <path d="M120,64 L52,112" stroke="#1a3a5c" stroke-width="8" stroke-linecap="round"/>
+        <rect x="18" y="110" width="250" height="14" rx="4" fill="#1a3a5c"/>
+        <path d="M210,70 L262,70 L270,98 L270,110 L210,110 Z" fill="#1a3a5c"/>
+        <path d="M217,77 L254,77 L259,94 L217,94 Z" fill="rgba(255,255,255,0.55)"/>
+        <circle cx="80" cy="128" r="15" fill="#1a3a5c"/>
+        <circle cx="236" cy="128" r="15" fill="#1a3a5c"/>
+      </svg></div>
+      <h4>Aircraft Transport Operations</h4>
+      <p>Time-critical meal delivery coordinated under strict airport security protocols.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon">🛠️</div>
+      <h4>Facility & Equipment</h4>
+      <p>Complete facility management and equipment maintenance for uninterrupted service.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon"><svg viewBox="0 0 100 100" style="width:34px;height:34px" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,28 L50,42 M50,42 L21,42 L21,56 M50,42 L79,42 L79,56" stroke="#1a3a5c" stroke-width="4" fill="none"/>
+        <rect x="34" y="8" width="32" height="20" rx="4" fill="#1a3a5c"/>
+        <rect x="5" y="56" width="32" height="20" rx="4" fill="#1a3a5c"/>
+        <rect x="63" y="56" width="32" height="20" rx="4" fill="#1a3a5c"/>
+      </svg></div>
+      <h4>Operational Planning</h4>
+      <p>Daily operational alignment with airline, airport and ground-handling systems.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon">📋</div>
+      <h4>Compliance & Regulatory</h4>
+      <p>Continuous adherence to aviation, food safety and customs regulations.</p>
+    </div>
+    <div class="op-item fade-up">
+      <div class="op-icon">🤝</div>
+      <h4>Customers Relation</h4>
+      <p>Maintaining strong customer relations through communication, prompt support, and proactive follow-up to ensure full satisfaction.</p>
+    </div>
+  </div>
+
+  <!-- Animated Runway (bottom) -->
+  <div class="runway-wrap">
+    <div class="runway-line"></div>
+    <div class="runway-dashes"></div>
+    <div class="runway-plane">
+      <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+        <!-- raised cargo box -->
+        <rect x="14" y="8" width="150" height="56" rx="5" fill="#c8a85a"/>
+        <!-- delivery bridge toward aircraft -->
+        <path d="M164,22 L214,30 L214,50 L164,54 Z" fill="#c8a85a"/>
+        <!-- scissor lift -->
+        <path d="M52,64 L120,112" stroke="#c8a85a" stroke-width="8" stroke-linecap="round"/>
+        <path d="M120,64 L52,112" stroke="#c8a85a" stroke-width="8" stroke-linecap="round"/>
+        <!-- chassis -->
+        <rect x="18" y="110" width="250" height="14" rx="4" fill="#c8a85a"/>
+        <!-- cab -->
+        <path d="M210,70 L262,70 L270,98 L270,110 L210,110 Z" fill="#c8a85a"/>
+        <!-- cab window -->
+        <path d="M217,77 L254,77 L259,94 L217,94 Z" fill="rgba(180,140,60,0.55)"/>
+        <!-- wheels -->
+        <circle cx="80" cy="128" r="15" fill="#c8a85a"/>
+        <circle cx="236" cy="128" r="15" fill="#c8a85a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OPERATIONAL FLOW ═══════════════ -->
+<section style="background: linear-gradient(rgba(255,255,255,.78), rgba(255,255,255,.78)), url('sky-clouds-bg.jpg') center/cover no-repeat fixed; padding: 56px 5%;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="fade-up" style="text-align: center; max-width: 680px; margin: 0 auto 64px;">
+      <div class="section-tag">End-to-End Process <span class="section-tag-plane">✈</span></div>
+      <h2>From Kitchen to <span>Aircraft Galley</span></h2>
+      <p>Every meal goes through a rigorous, multi-step process before it reaches the aircraft, ensuring safety, quality and compliance at every stage.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto;">
+      <div class="fade-up" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid #e5eef5;">
+        <div class="process-num">1</div>
+        <div>
+          <h3 class="process-step-h3">Procurement & Receiving</h3>
+          <p style="color: var(--text-muted); font-size: .9rem; line-height: 1.7;">Ingredients are sourced from approved suppliers, received and inspected against quality and Halal standards before entering the production facility.</p>
+        </div>
+      </div>
+      <div class="fade-up" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid #e5eef5;">
+        <div class="process-num">2</div>
+        <div>
+          <h3 class="process-step-h3">Production & Preparation</h3>
+          <p style="color: var(--text-muted); font-size: .9rem; line-height: 1.7;">In-house kitchen production aligned with airline specifications, cabin class requirements and passenger dietary needs under continuous HACCP monitoring.</p>
+        </div>
+      </div>
+      <div class="fade-up" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid #e5eef5;">
+        <div class="process-num">3</div>
+        <div>
+          <h3 class="process-step-h3">Quality Control & Packing</h3>
+          <p style="color: var(--text-muted); font-size: .9rem; line-height: 1.7;">Each meal is inspected, certified and packed to aviation standards. Cold chain integrity is maintained throughout packing and loading operations.</p>
+        </div>
+      </div>
+      <div class="fade-up" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid #e5eef5;">
+        <div class="process-num">4</div>
+        <div>
+          <h3 class="process-step-h3">Transport & Uplift</h3>
+          <p style="color: var(--text-muted); font-size: .9rem; line-height: 1.7;">Time-critical delivery to the aircraft under airport security protocols. Our airport-based location ensures punctual uplift aligned with departure schedules.</p>
+        </div>
+      </div>
+      <div class="fade-up" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px 0;">
+        <div class="process-num">5</div>
+        <div>
+          <h3 class="process-step-h3">Aircraft Loading & Cabin Setup</h3>
+          <p style="color: var(--text-muted); font-size: .9rem; line-height: 1.7;">Final loading and galley setup on board, ensuring correct positioning, temperature and presentation for every cabin class before departure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-banner">
+  <div class="fade-up" style="display: flex; align-items: center; gap: 50px; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
+    <img class="cta-logo-spin" src="WW-Logo-transparent.png" alt="WIN WINGS" style="width: 240px; max-width: 30vw; height: auto; flex-shrink: 0;" />
+    <div style="flex: 1; min-width: 280px; text-align: left;">
+      <div class="section-tag">Start a Partnership <span class="section-tag-plane">✈</span></div>
+      <h2>Reliable Operations, <span>Every Flight</span></h2>
+      <p>Partner with WIN WINGS and benefit from a fully integrated operational platform built for the highest aviation standards.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn-primary">Request a Proposal</a>
+        <a href="services.html" class="btn-navy">View All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logos">
+          <img class="ww-logo-white" src="WW-Logo-transparent.png" alt="WIN WINGS" />
+          <img src="WIN-GROUP-Logo-white.png" alt="WIN GROUP" />
+          <img class="ww-logo-white" src="WIN-EUROPE-Logo-transparent.png" alt="WIN EUROPE" />
+        </div>
+        <p>WIN WINGS is an integrated aviation catering and logistics operator delivering reliable, compliant and time-critical services to airline partners worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">In-Flight Catering</a></li>
+          <li><a href="services.html">VIP Class Catering</a></li>
+          <li><a href="services.html">Charter Catering</a></li>
+          <li><a href="services.html">Crew Catering</a></li>
+          <li><a href="services.html">Laundry Services</a></li>
+          <li><a href="services.html">Buy on Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="operations.html">Operations</a></li>
+          <li><a href="why-us.html">Why WIN WINGS</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Compliance</h5>
+        <ul>
+          <li><a href="about.html">Aviation Standards</a></li>
+          <li><a href="about.html">Halal Certification</a></li>
+          <li><a href="about.html">Food Safety</a></li>
+          <li><a href="about.html">Customs Bonded</a></li>
+          <li><a href="about.html">Airport Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WIN WINGS. All rights reserved. Serving the World Above the Sky.</p>
+      <span class="footer-plane">✈</span>
+      <p class="footer-powered">Powered by DigiGate © <img src="DigiGate_AI_Logo-removebg-preview.png" alt="DigiGate AI" class="footer-digigate-logo"></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  function toggleMenu(el) { el.classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.1}s`; observer.observe(el);
+  });
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => { if (a.getAttribute('href') === page) a.classList.add('active'); });
+</script>
+</body>
+</html>

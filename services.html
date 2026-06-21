@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services – WIN WINGS</title>
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+
+<!-- Hidden SVG filter: knocks out white bg → transparent, recolours logo to white -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="ww-knockout" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+               -4 -4 -4 0 11"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="3" intercept="-0.1"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <a href="index.html"><img src="WW-Logo (3).jpg" alt="WIN WINGS Logo" /></a>
+    <a href="index.html" class="nav-brand">WIN <span>WINGS</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="why-us.html">Why Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu(this)"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════ PAGE HEADER ═══════════════ -->
+<div class="page-header">
+  <div class="page-header-bg"></div>
+<div class="page-header-content">
+    <div class="section-tag">What We Do <span class="section-tag-plane">✈</span></div>
+    <h1>Our <span>Service Portfolio</span> <img class="hero-wings header-wings" src="Wings-Logo.jpg" alt="WIN WINGS wings" /></h1>
+    <p>A comprehensive range of aviation catering and support services designed to meet every airline, charter and operational requirement.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section class="services" id="services">
+  <div class="services-header fade-up">
+    <div class="section-tag">Complete Service Range <span class="section-tag-plane">✈</span></div>
+    <h2>Every Service <span>Above & Below the Clouds</span></h2>
+    <p>WIN WINGS provides a comprehensive range of aviation catering and support services, designed to meet every airline, charter and operational requirement with uncompromising quality.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('inflight-tray.jpg.jpg');"></div>
+      <div class="service-card-body">
+        <h3>In-Flight Catering</h3>
+        <p>Preparation and delivery of onboard meals for scheduled airline operations, meeting airline specifications and strict aviation standards.</p>
+        <ul>
+          <li>Menu development & refinement</li>
+          <li>Full food safety & hygiene control</li>
+          <li>Final in-flight presentation</li>
+          <li>Aligned with partner budgets & requirements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('vip-cabin-dining.jpg');"></div>
+      <div class="service-card-body">
+        <h3>VIP & Premium Class Catering</h3>
+        <p>Premium in-flight dining solutions for Business and VIP Class passengers, where culinary excellence and presentation reflect the highest service expectations.</p>
+        <ul>
+          <li>Executive chef-crafted menus</li>
+          <li>Restaurant-quality presentation</li>
+          <li>Fully compliant with airline specifications</li>
+          <li>Tailored to premium cabin standards</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('Charter.png');"></div>
+      <div class="service-card-body">
+        <h3>Charter Catering</h3>
+        <p>Customized catering solutions for charter and non-scheduled flights, designed to enhance the passenger experience with creative culinary touches.</p>
+        <ul>
+          <li>Business & Economy configurations</li>
+          <li>Partner menu concept alignment</li>
+          <li>Scalable and efficient execution</li>
+          <li>Memorable in-flight dining experience</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('pilot-meal.jpeg');"></div>
+      <div class="service-card-body">
+        <h3>Crew Catering</h3>
+        <p>Dedicated catering solutions designed to support flight and cabin crews, recognizing their critical role in safe and continuous flight operations.</p>
+        <ul>
+          <li>Carefully selected quality ingredients</li>
+          <li>Balanced & nutritious meals</li>
+          <li>Consistent presentation & taste</li>
+          <li>Uncompromising food safety standards</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('Hi-loader.png'); background-size: cover; background-position: center;"></div>
+      <div class="service-card-body">
+        <h3>Transport & Handling</h3>
+        <p>Professional transportation within the airport restricted zone, including full delivery to the aircraft and all related handling services, provided 24/7 for all aircraft types.</p>
+        <ul>
+          <li>Hi-Loaders and Vehicles Transport</li>
+          <li>Logistics and related Handling Services</li>
+          <li>Complete traceability & reliability</li>
+          <li>Continuous operational readiness</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-card service-card-luxe fade-up">
+      <div class="service-card-img" style="background-image: url('BOB2.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="service-card-body">
+        <h3>Especial Services</h3>
+        <p>Full Buy on Board and duty-free services supported by a customs-bonded warehouse, certified onboard payment systems and regulatory readiness.</p>
+        <ul>
+          <li>Customs bonded warehouse storage</li>
+          <li>Certified duty-free handling procedures</li>
+          <li>In-Flight Off-Line Payment Solution</li>
+          <li>Buy-on-Board Solutions</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICE HIGHLIGHTS ═══════════════ -->
+<section style="background: var(--navy); padding: 80px 5%;">
+  <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+    <div class="fade-up">
+      <div class="section-tag" style="color: var(--gold); justify-content: center;">Service Commitment <span class="section-tag-plane">✈</span></div>
+      <h2 style="color: var(--white);">Every Flight, <span style="color: var(--gold);">Every Time</span></h2>
+      <p style="color: rgba(255,255,255,.6); margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto;">Our service commitment is built on three pillars that define every interaction with our airline partners.</p>
+    </div>
+    <div class="commitment-grid">
+      <div class="commitment-card fade-up">
+        <div class="commitment-icon">⏱</div>
+        <h3>On-Time Delivery</h3>
+        <p>Time-critical delivery coordinated with flight schedules. Our airport-based position ensures zero delays and immediate response capability.</p>
+      </div>
+      <div class="commitment-card fade-up">
+        <div class="commitment-icon">🔬</div>
+        <h3>Certified Quality</h3>
+        <p>HACCP, Halal, aviation and food safety certifications maintained continuously. Quality is not a target — it is our baseline standard.</p>
+      </div>
+      <div class="commitment-card fade-up">
+        <div class="commitment-icon">🤝</div>
+        <h3>Partnership Focus</h3>
+        <p>We align with your brand standards, budget requirements and passenger expectations. Your success is our shared objective.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-banner">
+  <div class="fade-up" style="display: flex; align-items: center; gap: 50px; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; justify-content: center;">
+    <img class="cta-logo-spin" src="WW-Logo-transparent.png" alt="WIN WINGS" style="width: 240px; max-width: 30vw; height: auto; flex-shrink: 0;" />
+    <div style="flex: 1; min-width: 280px; text-align: left;">
+      <div class="section-tag">Request a Proposal <span class="section-tag-plane">✈</span></div>
+      <h2>Need a Custom <span>Service Package?</span></h2>
+      <p>Contact us to discuss your specific airline or charter requirements. We tailor every service solution to your exact operational needs.</p>
+      <div class="cta-actions" style="justify-content: flex-start;">
+        <a href="contact.html" class="btn-primary">Request a Proposal</a>
+        <a href="operations.html" class="btn-navy">See Our Operations</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logos">
+          <img class="ww-logo-white" src="WW-Logo-transparent.png" alt="WIN WINGS" />
+          <img src="WIN-GROUP-Logo-white.png" alt="WIN GROUP" />
+          <img class="ww-logo-white" src="WIN-EUROPE-Logo-transparent.png" alt="WIN EUROPE" />
+        </div>
+        <p>WIN WINGS is an integrated aviation catering and logistics operator delivering reliable, compliant and time-critical services to airline partners worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">In-Flight Catering</a></li>
+          <li><a href="services.html">VIP Class Catering</a></li>
+          <li><a href="services.html">Charter Catering</a></li>
+          <li><a href="services.html">Crew Catering</a></li>
+          <li><a href="services.html">Laundry Services</a></li>
+          <li><a href="services.html">Buy on Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="operations.html">Operations</a></li>
+          <li><a href="why-us.html">Why WIN WINGS</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Compliance</h5>
+        <ul>
+          <li><a href="about.html">Aviation Standards</a></li>
+          <li><a href="about.html">Halal Certification</a></li>
+          <li><a href="about.html">Food Safety</a></li>
+          <li><a href="about.html">Customs Bonded</a></li>
+          <li><a href="about.html">Airport Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WIN WINGS. All rights reserved. Serving the World Above the Sky.</p>
+      <span class="footer-plane">✈</span>
+      <p class="footer-powered">Powered by DigiGate © <img src="DigiGate_AI_Logo-removebg-preview.png" alt="DigiGate AI" class="footer-digigate-logo"></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  function toggleMenu(el) { el.classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.1}s`; observer.observe(el);
+  });
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => { if (a.getAttribute('href') === page) a.classList.add('active'); });
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="fsGreen" cx="48%" cy="42%" r="62%">
+      <stop offset="0%"  stop-color="#7eb583"/>
+      <stop offset="65%" stop-color="#5ea061"/>
+      <stop offset="100%" stop-color="#3f7942"/>
+    </radialGradient>
+    <path id="fsTopPath" d="M 62,180 A 138 138 0 0 1 338,180" fill="none"/>
+    <path id="fsBotPath" d="M 62,220 A 138 138 0 0 0 338,220" fill="none"/>
+  </defs>
+
+  <!-- 36-tooth scalloped outer using sin/cos wave around radius 175-185 -->
+  <g transform="translate(200 200)">
+    <!-- Scalloped circle via clipPath: draw with rays -->
+    <g fill="url(#fsGreen)">
+      <!-- Inner solid disc -->
+      <circle r="170" />
+      <!-- Scallop teeth radiating outward -->
+      <g>
+        <!-- Generated via JS to keep file short: 36 triangles at every 10° -->
+        <!-- Using rect rotated trick: 36 thin sectors -->
+      </g>
+    </g>
+    <!-- Approximate scallop edge: tiny circles around the rim -->
+    <g fill="url(#fsGreen)">
+      <circle r="6" cx="180" cy="0"/>
+      <circle r="6" cx="174" cy="44.7"/>
+      <circle r="6" cx="155.9" cy="86.4"/>
+      <circle r="6" cx="127.3" cy="122.4"/>
+      <circle r="6" cx="90" cy="156.6"/>
+      <circle r="6" cx="44.7" cy="174.4"/>
+      <circle r="6" cx="0" cy="180"/>
+      <circle r="6" cx="-44.7" cy="174.4"/>
+      <circle r="6" cx="-90" cy="156.6"/>
+      <circle r="6" cx="-127.3" cy="122.4"/>
+      <circle r="6" cx="-155.9" cy="86.4"/>
+      <circle r="6" cx="-174" cy="44.7"/>
+      <circle r="6" cx="-180" cy="0"/>
+      <circle r="6" cx="-174" cy="-44.7"/>
+      <circle r="6" cx="-155.9" cy="-86.4"/>
+      <circle r="6" cx="-127.3" cy="-122.4"/>
+      <circle r="6" cx="-90" cy="-156.6"/>
+      <circle r="6" cx="-44.7" cy="-174.4"/>
+      <circle r="6" cx="0" cy="-180"/>
+      <circle r="6" cx="44.7" cy="-174.4"/>
+      <circle r="6" cx="90" cy="-156.6"/>
+      <circle r="6" cx="127.3" cy="-122.4"/>
+      <circle r="6" cx="155.9" cy="-86.4"/>
+      <circle r="6" cx="174" cy="-44.7"/>
+    </g>
+  </g>
+
+  <!-- Inner thin white arcs (decorative) -->
+  <g transform="translate(200 200)" fill="none" stroke="#ffffff" stroke-width="2.4" opacity="0.95">
+    <path d="M -110,18 A 112 112 0 0 0 110,18"/>
+    <path d="M -110,-18 A 112 112 0 0 1 110,-18"/>
+  </g>
+
+  <!-- Curved FOOD top + SAFETY bottom -->
+  <text font-family="'Inter','Arial Black',sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="6" text-anchor="middle">
+    <textPath href="#fsTopPath" startOffset="50%">FOOD</textPath>
+  </text>
+  <text font-family="'Inter','Arial Black',sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="6" text-anchor="middle">
+    <textPath href="#fsBotPath" startOffset="50%">SAFETY</textPath>
+  </text>
+
+  <!-- Leaf sprout icon centre -->
+  <g transform="translate(200 200)" fill="white">
+    <path d="M -2,28 C -16,8 -38,-2 -58,-12 C -46,16 -22,30 -2,30 Z"/>
+    <path d="M 2,28 C 16,8 38,-2 58,-12 C 46,16 22,30 2,30 Z"/>
+    <rect x="-2.4" y="28" width="4.8" height="36" rx="2" fill="white"/>
+  </g>
+</svg>

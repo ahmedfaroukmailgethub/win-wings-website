@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a3a5c"/>
+      <stop offset="100%" stop-color="#3a6a96"/>
+    </linearGradient>
+    <linearGradient id="tray" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="cabin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#cfd6df"/>
+      <stop offset="100%" stop-color="#8b95a5"/>
+    </linearGradient>
+    <radialGradient id="window" cx="50%" cy="40%" r="60%">
+      <stop offset="0%"  stop-color="#bcd9f5"/>
+      <stop offset="100%" stop-color="#5d83af"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Cabin interior background -->
+  <rect width="800" height="400" fill="url(#cabin)"/>
+  <!-- Oval window -->
+  <ellipse cx="650" cy="120" rx="90" ry="65" fill="url(#window)" stroke="#3c4756" stroke-width="6"/>
+  <ellipse cx="650" cy="120" rx="76" ry="52" fill="none" stroke="#9aa6b8" stroke-width="2"/>
+  <!-- Clouds in window -->
+  <ellipse cx="630" cy="135" rx="34" ry="10" fill="#ffffff" opacity=".7"/>
+  <ellipse cx="660" cy="115" rx="22" ry="7"  fill="#ffffff" opacity=".55"/>
+
+  <!-- Seat back top -->
+  <rect x="0" y="0" width="800" height="40" fill="#252d3a"/>
+
+  <!-- Folding tray table -->
+  <rect x="60"  y="260" width="680" height="20" rx="3" fill="#3a4252"/>
+  <rect x="60"  y="278" width="680" height="6"  fill="#1f2530"/>
+
+  <!-- Meal tray on table -->
+  <rect x="120" y="170" width="560" height="100" rx="8" fill="url(#tray)" stroke="#000" stroke-width="2"/>
+  <rect x="130" y="180" width="540" height="84"  rx="6" fill="#2c2c2c"/>
+
+  <!-- Main dish container -->
+  <rect x="150" y="190" width="220" height="64" rx="6" fill="#e9d9b6" stroke="#a18550" stroke-width="2"/>
+  <!-- Rice -->
+  <ellipse cx="200" cy="222" rx="35" ry="18" fill="#fff7e0"/>
+  <!-- Vegetables -->
+  <circle cx="260" cy="215" r="8" fill="#7bb04a"/>
+  <circle cx="275" cy="225" r="7" fill="#e8703a"/>
+  <circle cx="290" cy="215" r="8" fill="#7bb04a"/>
+  <!-- Chicken/meat -->
+  <ellipse cx="335" cy="225" rx="22" ry="14" fill="#b06c2e"/>
+  <ellipse cx="335" cy="220" rx="14" ry="6"  fill="#d8884a" opacity=".7"/>
+
+  <!-- Side salad -->
+  <rect x="385" y="190" width="110" height="64" rx="6" fill="#e9d9b6" stroke="#a18550" stroke-width="2"/>
+  <circle cx="410" cy="215" r="9" fill="#5fa83a"/>
+  <circle cx="430" cy="225" r="8" fill="#7bb04a"/>
+  <circle cx="450" cy="215" r="6" fill="#d9342f"/>
+  <circle cx="470" cy="225" r="7" fill="#7bb04a"/>
+
+  <!-- Bread roll -->
+  <ellipse cx="540" cy="222" rx="28" ry="18" fill="#c89d5e" stroke="#8a6332" stroke-width="2"/>
+  <path d="M 520 218 Q 540 210 560 218" stroke="#8a6332" stroke-width="1.5" fill="none"/>
+
+  <!-- Cup of coffee -->
+  <rect x="595" y="195" width="55" height="55" rx="4" fill="#ffffff" stroke="#b8b8b8" stroke-width="1.5"/>
+  <ellipse cx="622" cy="205" rx="22" ry="6" fill="#5a3b22"/>
+  <path d="M 650 210 Q 666 215 660 235" stroke="#b8b8b8" stroke-width="3" fill="none"/>
+
+  <!-- Cutlery (right side) -->
+  <rect x="660" y="195" width="14" height="60" rx="2" fill="#3a4252"/>
+  <line x1="667" y1="200" x2="667" y2="250" stroke="#cfd6df" stroke-width="2"/>
+</svg>

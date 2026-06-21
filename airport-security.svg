@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 320" width="340" height="320">
+  <defs>
+    <linearGradient id="asRed" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#e83838"/>
+      <stop offset="55%"  stop-color="#c8262b"/>
+      <stop offset="100%" stop-color="#8c1417"/>
+    </linearGradient>
+    <linearGradient id="asBanner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#e63c3c"/>
+      <stop offset="100%" stop-color="#a31a1d"/>
+    </linearGradient>
+    <filter id="asShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- scalloped wavy outer seal -->
+  <g filter="url(#asShadow)" transform="translate(170 160)">
+    <path fill="url(#asRed)" d="
+      M 0,-140
+      C 22,-138 28,-122 50,-128
+      C 70,-132 80,-118 96,-108
+      C 110,-100 124,-104 132,-86
+      C 138,-70 134,-58 138,-40
+      C 142,-22 140,-8 140,8
+      C 140,28 132,40 128,58
+      C 124,76 120,90 108,104
+      C 96,118 88,128 70,134
+      C 50,140 32,138 12,140
+      C -8,142 -22,140 -42,134
+      C -62,128 -72,120 -88,108
+      C -104,96 -114,84 -120,68
+      C -126,52 -126,38 -130,20
+      C -134,2 -132,-14 -132,-32
+      C -132,-50 -130,-66 -124,-82
+      C -118,-98 -110,-110 -94,-118
+      C -78,-126 -64,-130 -46,-130
+      C -28,-130 -22,-138 0,-140 Z"/>
+    <!-- outer hairline -->
+    <path fill="none" stroke="white" stroke-width="2" opacity="0.85" d="
+      M 0,-122 C 22,-120 28,-108 48,-114 C 66,-118 76,-104 90,-94
+      C 102,-86 116,-90 124,-72 C 130,-58 126,-46 130,-30
+      C 134,-14 132,-2 132,12 C 132,28 124,40 122,54
+      C 118,68 114,82 102,94 C 90,106 84,114 68,118
+      C 50,124 32,122 12,124 C -8,126 -22,124 -40,118
+      C -58,112 -68,104 -82,94 C -96,84 -106,72 -112,58
+      C -118,44 -120,32 -122,18 C -124,4 -124,-12 -120,-26
+      C -116,-40 -108,-52 -94,-60 C -82,-66 -68,-70 -50,-70
+      C -28,-70 -22,-120 0,-122 Z"/>
+  </g>
+
+  <!-- top stars -->
+  <g fill="white" filter="url(#asShadow)">
+    <polygon points="100,80 105,93 119,93 108,101 112,114 100,106 88,114 92,101 81,93 95,93"/>
+    <polygon points="170,55 176,71 193,71 179,80 184,96 170,86 156,96 161,80 147,71 164,71"/>
+    <polygon points="240,80 245,93 259,93 248,101 252,114 240,106 228,114 232,101 221,93 235,93"/>
+  </g>
+
+  <!-- bottom stars -->
+  <g fill="white" filter="url(#asShadow)">
+    <polygon points="100,230 105,243 119,243 108,251 112,264 100,256 88,264 92,251 81,243 95,243"/>
+    <polygon points="170,250 176,266 193,266 179,275 184,291 170,281 156,291 161,275 147,266 164,266"/>
+    <polygon points="240,230 245,243 259,243 248,251 252,264 240,256 228,264 232,251 221,243 235,243"/>
+  </g>
+
+  <!-- diagonal banner -->
+  <g filter="url(#asShadow)">
+    <!-- banner shadow fold ends -->
+    <path d="M 26,176 L 56,158 L 56,196 L 26,206 Z"   fill="#7a1316"/>
+    <path d="M 314,176 L 284,158 L 284,196 L 314,206 Z" fill="#7a1316"/>
+    <!-- main banner -->
+    <rect x="52" y="138" width="236" height="58" fill="url(#asBanner)"/>
+    <!-- highlight stripe -->
+    <rect x="52" y="138" width="236" height="4" fill="white" opacity="0.25"/>
+    <rect x="52" y="192" width="236" height="3" fill="black" opacity="0.18"/>
+  </g>
+
+  <!-- banner text -->
+  <text x="170" y="178" text-anchor="middle"
+        font-family="'Inter','Arial Black',sans-serif"
+        font-size="26" font-weight="900" fill="#ffffff" letter-spacing="2.5">AIRPORT SECURITY</text>
+</svg>

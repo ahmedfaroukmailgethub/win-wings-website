@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WIN WINGS – Serving the World Above the Sky</title>
+  <link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+
+<!-- Hidden SVG filter: knocks out white bg → transparent, recolours logo to white -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="ww-knockout" color-interpolation-filters="sRGB"
+            x="0%" y="0%" width="100%" height="100%">
+      <!-- Paint every pixel white, compute alpha = -4R-4G-4B+11
+           White (1,1,1) → A = -1 → 0 (transparent)
+           JPEG near-white artifacts (0.9,0.9,0.9) → A ≈ 0.2 → near transparent
+           Dark logo pixels (0.1,0.23,0.35) → A > 8 → 1 (fully opaque white) -->
+      <feColorMatrix type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+               -4 -4 -4 0 11"/>
+      <!-- Steepen the alpha curve: knock out any residual soft edges -->
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="3" intercept="-0.1"/>
+      </feComponentTransfer>
+    </filter>
+
+    <!-- Color-preserving white knockout: removes white background but keeps colors intact.
+         Explicit region clipped to image bounds so padding doesn't fill with opaque black.
+         Alpha formula uses source alpha so genuinely transparent pixels stay transparent. -->
+    <filter id="white-to-alpha" color-interpolation-filters="sRGB"
+            x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+               -3 -3 -3 4 0"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="3" intercept="-0.1"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <a href="index.html"><img src="WW-Logo-transparent.png" alt="WIN WINGS Logo" /></a>
+    <a href="index.html" class="nav-brand">WIN <span>WINGS</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="why-us.html">Why Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu(this)"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="home">
+
+  <!-- ✦ Animated Sky Canvas – replaces static gradient ✦ -->
+  <div id="skyCanvas" class="sky-canvas">
+    <!-- Stars (populated by JS) -->
+    <div id="starsField" class="stars-field"></div>
+    <!-- Horizon atmospheric glow -->
+    <div id="horizonGlow" class="horizon-glow"></div>
+    <!-- Sun -->
+    <div id="sunBody" class="sky-body">
+      <div class="body-glow"></div>
+      <div class="body-core"></div>
+    </div>
+    <!-- Moon -->
+    <div id="moonBody" class="sky-body">
+      <div class="body-glow"></div>
+      <div class="body-core"></div>
+    </div>
+    <!-- Dark left-side overlay keeps hero text readable -->
+    <div class="sky-text-overlay"></div>
+  </div>
+
+  <!-- Fluffy cumulus clouds – left to right, CSS blur softens edges into 3D cotton puffs -->
+  <div class="clouds">
+    <!-- Cloud 2 – medium, 4-bump cloud -->
+    <div class="cloud c2">
+      <svg viewBox="0 0 270 108" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow:visible;" opacity="0.88">
+        <defs>
+          <radialGradient id="cg2" cx="48%" cy="24%" r="68%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#eef4fc"/>
+            <stop offset="100%" stop-color="#c0cce6" stop-opacity="0.5"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="135" cy="100" rx="116" ry="10" fill="#88a4c8" opacity="0.20"/>
+        <circle cx="50"  cy="76"  r="40" fill="url(#cg2)"/>
+        <circle cx="102" cy="58"  r="52" fill="url(#cg2)"/>
+        <circle cx="170" cy="64"  r="46" fill="url(#cg2)"/>
+        <circle cx="226" cy="74"  r="38" fill="url(#cg2)"/>
+        <path d="M 18,82 Q 18,100 50,102 L 224,102 Q 248,100 246,82 Z" fill="white" opacity="0.74"/>
+        <circle cx="102" cy="38"  r="24" fill="white" opacity="0.38"/>
+        <circle cx="170" cy="44"  r="20" fill="white" opacity="0.28"/>
+      </svg>
+    </div>
+    <!-- Cloud 3 – medium-large, 5-bump cloud -->
+    <div class="cloud c3">
+      <svg viewBox="0 0 325 118" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow:visible;" opacity="0.90">
+        <defs>
+          <radialGradient id="cg3" cx="50%" cy="24%" r="68%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#eef3fc"/>
+            <stop offset="100%" stop-color="#bec9e2" stop-opacity="0.5"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="162" cy="110" rx="144" ry="11" fill="#88a4c8" opacity="0.20"/>
+        <circle cx="58"  cy="82"  r="46" fill="url(#cg3)"/>
+        <circle cx="116" cy="64"  r="58" fill="url(#cg3)"/>
+        <circle cx="188" cy="70"  r="52" fill="url(#cg3)"/>
+        <circle cx="252" cy="78"  r="44" fill="url(#cg3)"/>
+        <circle cx="300" cy="88"  r="34" fill="url(#cg3)"/>
+        <path d="M 22,90 Q 22,112 58,114 L 298,114 Q 318,112 316,90 Z" fill="white" opacity="0.72"/>
+        <circle cx="116" cy="44"  r="28" fill="white" opacity="0.40"/>
+        <circle cx="188" cy="50"  r="22" fill="white" opacity="0.30"/>
+      </svg>
+    </div>
+    <!-- Cloud 4 – small, 3-bump cloud -->
+    <div class="cloud c4">
+      <svg viewBox="0 0 210 90" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow:visible;" opacity="0.85">
+        <defs>
+          <radialGradient id="cg4" cx="50%" cy="26%" r="68%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#eef4fc"/>
+            <stop offset="100%" stop-color="#c2cee4" stop-opacity="0.5"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="105" cy="84" rx="92" ry="8" fill="#88a4c8" opacity="0.18"/>
+        <circle cx="44"  cy="62"  r="36" fill="url(#cg4)"/>
+        <circle cx="92"  cy="48"  r="46" fill="url(#cg4)"/>
+        <circle cx="152" cy="54"  r="38" fill="url(#cg4)"/>
+        <circle cx="188" cy="64"  r="28" fill="url(#cg4)"/>
+        <path d="M 14,70 Q 14,84 44,86 L 186,86 Q 200,84 198,70 Z" fill="white" opacity="0.74"/>
+        <circle cx="92"  cy="30"  r="20" fill="white" opacity="0.36"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main airplane – detailed commercial airliner, flies left → right -->
+  <div class="hero-plane">
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- Fuselage body -->
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="white"/>
+      <!-- Tail cone -->
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="white"/>
+      <!-- Vertical tail fin -->
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="white"/>
+      <!-- Horizontal stabiliser – upper -->
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="white"/>
+      <!-- Horizontal stabiliser – lower -->
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="white"/>
+      <!-- Main wing (swept back) -->
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="white"/>
+      <!-- Engine nacelle -->
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="white"/>
+      <!-- Engine intake ring -->
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.45)"/>
+      <!-- Engine highlight line -->
+      <path d="M 216,120 Q 268,117 300,124" stroke="rgba(220,220,220,0.5)" stroke-width="2" fill="none"/>
+      <!-- Windows row -->
+      <g fill="rgba(26,58,92,0.22)">
+        <rect x="172" y="97"  width="14" height="10" rx="3"/>
+        <rect x="194" y="96"  width="14" height="10" rx="3"/>
+        <rect x="216" y="95"  width="14" height="10" rx="3"/>
+        <rect x="238" y="95"  width="14" height="10" rx="3"/>
+        <rect x="260" y="94"  width="14" height="10" rx="3"/>
+        <rect x="282" y="94"  width="14" height="10" rx="3"/>
+        <rect x="304" y="93"  width="14" height="10" rx="3"/>
+        <rect x="326" y="93"  width="14" height="10" rx="3"/>
+        <rect x="348" y="93"  width="14" height="10" rx="3"/>
+        <rect x="370" y="92"  width="14" height="10" rx="3"/>
+        <rect x="392" y="92"  width="14" height="10" rx="3"/>
+        <rect x="414" y="92"  width="14" height="10" rx="3"/>
+        <rect x="436" y="91"  width="14" height="10" rx="3"/>
+        <rect x="458" y="91"  width="14" height="10" rx="3"/>
+        <rect x="480" y="91"  width="14" height="10" rx="3"/>
+        <rect x="502" y="91"  width="14" height="10" rx="3"/>
+        <rect x="524" y="91"  width="14" height="10" rx="3"/>
+        <rect x="546" y="91"  width="14" height="10" rx="3"/>
+        <rect x="568" y="91"  width="14" height="10" rx="3"/>
+        <rect x="590" y="91"  width="14" height="10" rx="3"/>
+      </g>
+      <!-- Door outlines -->
+      <rect x="164" y="96" width="6" height="22" rx="2" fill="none" stroke="rgba(26,58,92,0.15)" stroke-width="1.5"/>
+      <rect x="548" y="90" width="6" height="22" rx="2" fill="none" stroke="rgba(26,58,92,0.15)" stroke-width="1.5"/>
+      <!-- Cockpit windows -->
+      <path d="M 636,94 L 674,96 C 688,103 694,112 694,118 L 676,120 C 674,113 665,105 643,99 Z" fill="rgba(100,165,225,0.22)"/>
+    </svg>
+  </div>
+
+  <!-- All 5 mini-planes – uniform ~120px width, flying left → right through the middle -->
+  <div class="mini-plane mp1">
+    <svg width="120" height="38" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="rgba(255,255,255,0.7)"/>
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.4)"/>
+    </svg>
+  </div>
+  <div class="mini-plane mp2">
+    <svg width="115" height="36" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="rgba(255,255,255,0.65)"/>
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="rgba(255,255,255,0.65)"/>
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.35)"/>
+    </svg>
+  </div>
+  <div class="mini-plane mp3">
+    <svg width="125" height="39" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="rgba(255,255,255,0.68)"/>
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="rgba(255,255,255,0.68)"/>
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.38)"/>
+    </svg>
+  </div>
+  <div class="mini-plane mp4">
+    <svg width="110" height="35" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="rgba(255,255,255,0.62)"/>
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="rgba(255,255,255,0.62)"/>
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.32)"/>
+    </svg>
+  </div>
+  <div class="mini-plane mp5">
+    <svg width="118" height="37" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 88,104 C 250,87 470,85 612,91 C 654,94 684,106 694,118 C 684,130 654,142 612,147 C 470,153 250,151 88,134 C 67,131 50,125 46,118 C 50,111 67,107 88,104 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 88,104 C 70,107 52,113 42,118 C 38,120 42,126 50,128 C 60,128 74,126 88,124 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 90,104 C 100,83 112,57 124,37 C 130,25 143,21 156,29 C 166,35 168,52 162,68 L 153,88 L 130,104 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 74,111 C 50,106 24,102 8,98 L 12,92 C 30,95 55,99 76,105 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 74,127 C 50,132 24,135 8,139 L 12,145 C 30,142 55,137 76,131 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 322,108 C 300,96 278,74 254,50 C 244,39 227,33 213,40 C 201,46 199,60 206,74 C 213,84 230,93 250,99 L 314,113 Z" fill="rgba(255,255,255,0.66)"/>
+      <path d="M 256,120 C 228,118 204,124 198,137 C 194,147 200,159 216,163 C 231,167 260,167 284,163 C 300,159 309,150 306,140 C 301,128 282,120 256,120 Z" fill="rgba(255,255,255,0.66)"/>
+      <ellipse cx="200" cy="140" rx="10" ry="14" fill="rgba(200,200,200,0.36)"/>
+    </svg>
+  </div>
+
+  <!-- 24-hour food clock — top center of hero, hands synced to day/night cycle -->
+  <div class="food-clock-wrap" aria-label="24-hour catering clock">
+    <img class="food-clock-face" src="food-clock.png" alt="Food clock — 12 dishes around the dial" />
+    <svg class="food-clock-hands" viewBox="0 0 100 100" aria-hidden="true">
+      <line class="hour-hand"   x1="50" y1="50" x2="50" y2="30" stroke="#ffffff" stroke-width="3.6" stroke-linecap="round"/>
+      <line class="minute-hand" x1="50" y1="50" x2="50" y2="20" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="2.6" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Aviation Catering Excellence</div>
+    <h1 class="hero-title">WIN<img class="hero-wings" src="Wings-Logo.jpg" alt="WIN WINGS wings"><br /><span>WINGS</span></h1>
+    <div class="hero-slogan-row">
+      <p class="hero-slogan">Serving the World Above the Sky</p>
+      <div class="hero-actions">
+        <a href="services.html" class="btn-primary">Explore Services</a>
+        <a href="contact.html" class="btn-outline">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats hero-stats-2">
+    <img class="cert-badge-inline" src="work-safety.png" alt="Safety First" />
+    <img class="cert-badge-inline" src="recycle.png" alt="Recycle · Reuse · Reduce" />
+    <img class="cert-badge-inline" src="eco-friendly.png" alt="Eco Friendly" />
+    <img class="cert-badge-inline" src="Halal.png" alt="HALAL Certified" />
+    <img class="cert-badge-inline" src="haccp.png" alt="HACCP Certified" />
+    <img class="cert-badge-inline" src="ghp.png?v=2" alt="GHP Certified — Good Hygiene Practice" />
+    <img class="cert-badge-inline" src="cctv.png" alt="CCTV On Operation" />
+    <img class="cert-badge-inline" src="airport-security.png" alt="Airport Security" />
+    <img class="cert-badge-inline cert-badge-wide" src="restricted-area.png" alt="Restricted Area — Authorized Personnel Only" />
+    <img class="cert-badge-inline cert-badge-onwhite" src="Bonded-Warehouse-Logo.webp" alt="Bonded Warehouse" />
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="stat-num">70+</div><div class="stat-label">Years Catering Facility Experience</div></div>
+    <div class="hero-stat"><div class="stat-num">50+</div><div class="stat-label">Types of Food Items</div></div>
+    <div class="hero-stat"><div class="stat-num">24/7</div><div class="stat-label">Operations</div></div>
+    <div class="hero-stat"><div class="stat-num">100%</div><div class="stat-label">Certified Standards</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST / CERTIFICATIONS BAND ═══════════════ -->
+<section class="trust-band">
+  <div class="trust-inner">
+    <div class="trust-card fade-up">
+      <div class="trust-icon icon-catering">🍽️</div>
+      <div class="trust-text">
+        <h5>In-Flight Catering</h5>
+        <p>Meals for Business, Economy and Crew</p>
+      </div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="trust-icon icon-vip" aria-label="VIP">VIP</div>
+      <div class="trust-text">
+        <h5>Charters and VIP Flights</h5>
+        <p>Custom Food Offering</p>
+      </div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="trust-icon icon-transport" aria-label="Hi-Loader catering truck">
+        <svg viewBox="0 0 96 76" width="46" height="38" aria-hidden="true" fill="currentColor">
+          <!-- Raised catering container -->
+          <rect x="4"  y="2"  width="56" height="32" rx="1"/>
+          <!-- Container door (inset) -->
+          <rect x="28" y="6"  width="14" height="26" fill="#ffffff"/>
+          <rect x="28" y="6"  width="14" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+          <!-- Side rail extension (right of container) -->
+          <rect x="62" y="20" width="20" height="14" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="68" y1="20" x2="68" y2="34" stroke="currentColor" stroke-width="2"/>
+          <line x1="74" y1="20" x2="74" y2="34" stroke="currentColor" stroke-width="2"/>
+          <line x1="80" y1="20" x2="80" y2="34" stroke="currentColor" stroke-width="2"/>
+          <!-- Lift platform under container -->
+          <rect x="6"  y="34" width="56" height="4"/>
+          <!-- Scissor lift X -->
+          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none">
+            <line x1="14" y1="38" x2="38" y2="58"/>
+            <line x1="38" y1="38" x2="14" y2="58"/>
+          </g>
+          <!-- Truck chassis (full width base) -->
+          <rect x="4"  y="58" width="84" height="8" rx="1"/>
+          <!-- Vertical guide posts -->
+          <rect x="6"  y="38" width="3"  height="22"/>
+          <rect x="43" y="38" width="3"  height="22"/>
+          <!-- Cab on right -->
+          <path d="M68 58 L68 40 L84 40 Q92 40 92 48 L92 58 Z"/>
+          <!-- Cab window -->
+          <path d="M72 44 L84 44 Q88 44 88 50 L88 54 L72 54 Z" fill="#ffffff" opacity=".9"/>
+          <!-- Wheels -->
+          <circle cx="20" cy="68" r="6"/>
+          <circle cx="20" cy="68" r="2.5" fill="#ffffff"/>
+          <circle cx="78" cy="68" r="6"/>
+          <circle cx="78" cy="68" r="2.5" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="trust-text">
+        <h5>Transport and Related Handling</h5>
+        <p>Complete delivery to aircraft</p>
+      </div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="trust-icon icon-warehouse">🏬</div>
+      <div class="trust-text">
+        <h5>Custom Warehouse and Related Logistics</h5>
+        <p>Airport-bonded operations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ HUB NAVIGATION ═══════════════ -->
+<section class="hub-section">
+  <div class="hub-intro fade-up">
+    <div class="section-tag">Explore WIN WINGS <span class="section-tag-plane">✈</span></div>
+    <h2>Integrated Aviation <span>Catering & Logistics</span></h2>
+    <p>WIN WINGS is an established aviation catering company providing integrated food production, logistics and operational services to airline and aviation partners worldwide. Explore our full offering below.</p>
+  </div>
+  <div class="hub-grid">
+    <a href="about.html" class="hub-card fade-up">
+      <div class="hub-card-top">
+        <img class="hub-card-img" src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=70" alt="Aviation hangar" />
+        <h3>About Us</h3>
+      </div>
+      <div class="hub-card-body">
+        <p>70+ years of operational experience, airport-based 24/7 availability and full compliance with all aviation regulations.</p>
+        <span class="hub-card-link">Learn More</span>
+      </div>
+    </a>
+    <a href="services.html" class="hub-card fade-up">
+      <div class="hub-card-top">
+        <img class="hub-card-img" src="inflight-meal.jpg" alt="In-flight luxury dining" />
+        <h3>Services</h3>
+      </div>
+      <div class="hub-card-body">
+        <p>In-flight catering, VIP class, charter, crew meals, laundry & cabin equipment, and buy-on-board services.</p>
+        <span class="hub-card-link">View Services</span>
+      </div>
+    </a>
+    <a href="operations.html" class="hub-card fade-up">
+      <div class="hub-card-top">
+        <img class="hub-card-img" src="Hi-loader.png" alt="WIN WINGS hi-loader at aircraft" />
+        <h3>Operations</h3>
+      </div>
+      <div class="hub-card-body">
+        <p>All mission-critical functions — kitchen, quality control, procurement, transport, compliance — fully in-house.</p>
+        <span class="hub-card-link">See Operations</span>
+      </div>
+    </a>
+    <a href="why-us.html" class="hub-card fade-up">
+      <div class="hub-card-top">
+        <img class="hub-card-img" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=70" alt="Aircraft in sky" />
+        <h3>Why Us</h3>
+      </div>
+      <div class="hub-card-body">
+        <p>An established platform with high-barrier certifications, diversified services and a scalable growth model.</p>
+        <span class="hub-card-link">Our Advantage</span>
+      </div>
+    </a>
+    <a href="contact.html" class="hub-card fade-up">
+      <div class="hub-card-top">
+        <img class="hub-card-img" src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=70" alt="Runway at sunset" />
+        <h3>Contact</h3>
+      </div>
+      <div class="hub-card-body">
+        <p>Request a proposal, discuss your operational requirements, or start a partnership conversation today.</p>
+        <span class="hub-card-link">Get in Touch</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logos">
+          <img class="ww-logo-white" src="WW-Logo-transparent.png" alt="WIN WINGS" />
+          <img src="WIN-GROUP-Logo-white.png" alt="WIN GROUP" />
+          <img class="ww-logo-white" src="WIN-EUROPE-Logo-transparent.png" alt="WIN EUROPE" />
+        </div>
+        <p>WIN WINGS is an integrated aviation catering and logistics operator delivering reliable, compliant and time-critical services to airline partners worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">In-Flight Catering</a></li>
+          <li><a href="services.html">VIP Class Catering</a></li>
+          <li><a href="services.html">Charter Catering</a></li>
+          <li><a href="services.html">Crew Catering</a></li>
+          <li><a href="services.html">Laundry Services</a></li>
+          <li><a href="services.html">Buy on Board</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="operations.html">Operations</a></li>
+          <li><a href="why-us.html">Why WIN WINGS</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Compliance</h5>
+        <ul>
+          <li><a href="about.html">Aviation Standards</a></li>
+          <li><a href="about.html">Halal Certification</a></li>
+          <li><a href="about.html">Food Safety</a></li>
+          <li><a href="about.html">Customs Bonded</a></li>
+          <li><a href="about.html">Airport Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WIN WINGS. All rights reserved. Serving the World Above the Sky.</p>
+      <span class="footer-plane">✈</span>
+      <p class="footer-powered">Powered by DigiGate © <img src="DigiGate_AI_Logo-removebg-preview.png" alt="DigiGate AI" class="footer-digigate-logo"></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  function toggleMenu(el) { el.classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.1}s`; observer.observe(el);
+  });
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => { if (a.getAttribute('href') === page) a.classList.add('active'); });
+  function animateCounter(el, target, suffix) {
+    let start = 0; const duration = 1800;
+    const step = ts => { if (!start) start = ts; const p = Math.min((ts - start) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = Math.floor(e * target) + suffix; if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { const nums = e.target.querySelectorAll('.stat-num'); nums.forEach(n => { const t = n.textContent; if (t.includes('70')) animateCounter(n, 70, '+'); else if (t.includes('30')) animateCounter(n, 30, 'K+'); else if (t.includes('100')) animateCounter(n, 100, '%'); }); statsObs.unobserve(e.target); } }); }, { threshold: 0.5 });
+  const hs = document.querySelector('.hero-stats'); if (hs) statsObs.observe(hs);
+
+  /* ══════════════════════════════════════════════════════════════
+     ANIMATED SKY – Day/Night cycle
+     Sun sweeps from E horizon (angle 0°) → zenith (90°) → W horizon (180°)
+     Moon is 180° out of phase. Full cycle: 60 seconds.
+  ══════════════════════════════════════════════════════════════ */
+  (function initSky() {
+    const CYCLE     = 60000;   // ms per full 360° revolution
+    const START_DEG = 28;      // begin at nice morning sunrise angle
+
+    const canvas    = document.getElementById('skyCanvas');
+    const sunEl     = document.getElementById('sunBody');
+    const moonEl    = document.getElementById('moonBody');
+    const horizonEl = document.getElementById('horizonGlow');
+    const starsEl   = document.getElementById('starsField');
+    if (!canvas) return;
+
+    /* ── helpers ── */
+    const lerp  = (a, b, t) => a + (b - a) * t;
+    const lerp3 = (a, b, t) => [lerp(a[0],b[0],t), lerp(a[1],b[1],t), lerp(a[2],b[2],t)];
+    const rgb   = c => `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`;
+    const clamp = (v,lo,hi) => Math.max(lo, Math.min(hi, v));
+
+    /* ── sky colour phases  [angle°, topRGB, midRGB, horizonRGB] ── */
+    const SKY = [
+      [  0, [8,14,45],    [18,32,88],    [72,50,95]   ], // first light
+      [  7, [16,28,80],   [85,60,118],   [210,100,60] ], // dawn glow
+      [ 18, [42,84,162],  [100,152,212], [252,178,80] ], // sunrise warm
+      [ 36, [26,95,194],  [84,148,218],  [174,215,250]], // morning bright
+      [ 70, [14,78,170],  [62,136,208],  [150,198,234]], // mid-morning
+      [ 90, [10,70,158],  [55,128,202],  [144,192,228]], // noon — rich blue
+      [125, [14,77,166],  [62,134,205],  [184,206,202]], // afternoon
+      [150, [30,44,122],  [140,78,74],   [238,154,65] ], // pre-sunset warm
+      [162, [20,16,74],   [170,74,55],   [248,134,45] ], // sunset orange
+      [173, [16,9,55],    [100,44,74],   [190,84,45]  ], // late sunset deep
+      [181, [8,10,44],    [20,25,76],    [50,34,68]   ], // dusk transition
+      [196, [4,7,28],     [7,12,44],     [10,20,60]   ], // night begins
+      [250, [2,4,18],     [3,6,22],      [4,8,28]     ], // deep night
+      [310, [2,4,16],     [3,5,20],      [4,7,25]     ], // midnight
+      [346, [4,7,22],     [7,13,40],     [13,22,54]   ], // late night
+      [356, [6,11,36],    [13,24,64],    [26,36,74]   ], // pre-dawn
+      [360, [8,14,45],    [18,32,88],    [72,50,95]   ], // = 0°
+    ];
+
+    function skyColors(a) {
+      let p = SKY[0], q = SKY[1];
+      for (let i = 0; i < SKY.length - 1; i++) {
+        if (a >= SKY[i][0] && a <= SKY[i+1][0]) { p = SKY[i]; q = SKY[i+1]; break; }
+      }
+      const t = (q[0]===p[0]) ? 1 : (a - p[0]) / (q[0] - p[0]);
+      return { top: lerp3(p[1],q[1],t), mid: lerp3(p[2],q[2],t), bot: lerp3(p[3],q[3],t) };
+    }
+
+    /* ── celestial arc ── */
+    /* Arc centre sits BELOW the hero; angle=0→right horizon, 90→zenith, 180→left horizon */
+    function arcPos(deg) {
+      const W = canvas.clientWidth  || window.innerWidth;
+      const H = canvas.clientHeight || window.innerHeight;
+      const cx = W * 0.50;
+      const cy = H * 1.38; // pivot below hero
+      const r  = H * 1.18;
+      const rad = deg * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy - r * Math.sin(rad) };
+    }
+
+    /* visible: fade in 0°→12°, full 12°→168°, fade out 168°→180° */
+    function bodyOpacity(deg) {
+      if (deg <= 0 || deg >= 180) return 0;
+      if (deg < 12)  return (deg)        / 12;
+      if (deg > 168) return (180 - deg)  / 12;
+      return 1;
+    }
+
+    /* ── stars ── */
+    const STARS = 100;
+    const starData = [];
+    for (let i = 0; i < STARS; i++) {
+      const el  = document.createElement('div');
+      el.className = 'sky-star';
+      const sz  = 0.7 + Math.random() * 2.0;
+      const so  = (0.35 + Math.random() * 0.65).toFixed(2);
+      const dur = (2 + Math.random() * 3.5).toFixed(1);
+      const del = (Math.random() * 4).toFixed(1);
+      el.style.cssText = [
+        `width:${sz}px`,`height:${sz}px`,
+        `left:${(Math.random()*94+2).toFixed(1)}%`,
+        `top:${(Math.random()*62+1).toFixed(1)}%`,
+        `--so:${so}`, `opacity:0`,
+        `animation-duration:${dur}s`,
+        `animation-delay:${del}s`
+      ].join(';');
+      starsEl.appendChild(el);
+      starData.push({ el, so: parseFloat(so) });
+    }
+
+    /* ── main loop ── */
+    let t0 = null, skyLast = 0, starsLast = 0;
+
+    function tick(ts) {
+      if (!t0) t0 = ts;
+      const elapsed = ts - t0;
+      const sunDeg  = ((START_DEG + (elapsed / CYCLE) * 360) % 360 + 360) % 360;
+      const moonDeg = (sunDeg + 180) % 360;
+
+      /* positions */
+      const sp = arcPos(sunDeg), mp = arcPos(moonDeg);
+      sunEl.style.left    = sp.x + 'px';
+      sunEl.style.top     = sp.y + 'px';
+      sunEl.style.opacity = bodyOpacity(sunDeg);
+      moonEl.style.left   = mp.x + 'px';
+      moonEl.style.top    = mp.y + 'px';
+      moonEl.style.opacity= bodyOpacity(moonDeg);
+
+      /* sky gradient – throttled 100ms */
+      if (ts - skyLast > 100) {
+        skyLast = ts;
+        const c = skyColors(sunDeg);
+        canvas.style.background =
+          `linear-gradient(180deg,${rgb(c.top)} 0%,${rgb(c.mid)} 46%,${rgb(c.bot)} 100%)`;
+
+        /* horizon atmospheric glow */
+        const sunrise = sunDeg  > 0   && sunDeg  < 38;
+        const sunset  = sunDeg  > 144 && sunDeg  < 180;
+        const mrise   = moonDeg > 0   && moonDeg < 28;
+        const mset    = moonDeg > 154 && moonDeg < 180;
+        if (sunrise) {
+          const p = sunDeg / 38, a = Math.sin(p * Math.PI);
+          horizonEl.style.background =
+            `linear-gradient(to top,rgba(255,125,28,${(a*.7).toFixed(2)}) 0%,rgba(255,195,55,${(a*.32).toFixed(2)}) 22%,transparent 62%)`;
+        } else if (sunset) {
+          const p = (sunDeg - 144) / 36, a = Math.sin(p * Math.PI);
+          horizonEl.style.background =
+            `linear-gradient(to top,rgba(255,80,18,${(a*.75).toFixed(2)}) 0%,rgba(255,155,45,${(a*.35).toFixed(2)}) 20%,rgba(195,72,120,${(a*.12).toFixed(2)}) 44%,transparent 68%)`;
+        } else if (mrise || mset) {
+          const p = mrise ? moonDeg/28 : (180-moonDeg)/26;
+          const a = Math.sin(p * Math.PI) * 0.22;
+          horizonEl.style.background =
+            `linear-gradient(to top,rgba(135,158,222,${a.toFixed(2)}) 0%,transparent 45%)`;
+        } else {
+          horizonEl.style.background = 'none';
+        }
+      }
+
+      /* stars – throttled 250ms */
+      if (ts - starsLast > 250) {
+        starsLast = ts;
+        /* night: sun between 182° and 358° */
+        let night = 0;
+        if (sunDeg > 182 && sunDeg < 358) {
+          if      (sunDeg < 212) night = (sunDeg - 182) / 30;
+          else if (sunDeg > 335) night = (358 - sunDeg) / 23;
+          else                   night = 1;
+        }
+        starData.forEach(s => {
+          s.el.style.opacity = (s.so * night).toFixed(2);
+        });
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  })();
+</script>
+</body>
+</html>
