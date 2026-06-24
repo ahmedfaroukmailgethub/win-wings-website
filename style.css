@@ -1793,6 +1793,31 @@ footer { background: #0f2236; padding: 60px 5% 32px; }
 @media (max-width: 720px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
+  /* Mobile dropdown menu (revealed when hamburger is open) */
+  #navbar:has(.hamburger.open) .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: none;
+    background: #ffffff;
+    padding: 6px 0 10px;
+    box-shadow: 0 12px 28px rgba(26,58,92,0.16);
+    border-bottom: 1px solid rgba(26,58,92,0.08);
+  }
+  #navbar:has(.hamburger.open) .nav-links li { width: 100%; }
+  #navbar:has(.hamburger.open) .nav-links a {
+    display: block;
+    padding: 14px 6%;
+    border-bottom: 1px solid rgba(26,58,92,0.05);
+  }
+  /* hamburger → X when open */
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .hero-stats { flex-wrap: wrap; }
   .hero-stat  { min-width: 50%; }
   .footer-grid { grid-template-columns: 1fr; }
@@ -1800,4 +1825,33 @@ footer { background: #0f2236; padding: 60px 5% 32px; }
   .why-tile:first-child { grid-column: span 1; }
   .page-header { padding: 120px 5% 60px; }
   .page-header-plane { display: none; }
+}
+
+/* ════════════ RESPONSIVE HARDENING ════════════ */
+@media (max-width: 720px) {
+  /* Guard against any stray horizontal scrolling */
+  html, body { overflow-x: hidden; }
+  img, svg, video, iframe { max-width: 100%; height: auto; }
+  .header-wings, .hero-wings { height: 0.85em; width: auto; } /* keep inline logos sized to text */
+
+  /* HERO — the slogan + CTA buttons were locked in one non-wrapping row,
+     forcing ~780px width and clipping the buttons. Let them stack & wrap.
+     Also give the hero extra height so the top content clears the
+     bottom-anchored badges + stats overlays instead of overlapping them. */
+  .hero { min-height: 116vh; }
+  .hero-content { max-width: 100%; min-width: 0; padding-top: 78px; }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-title   { font-size: clamp(2.3rem, 12.5vw, 3.4rem); letter-spacing: 2px; margin-bottom: 18px; }
+  .hero-slogan  { margin-bottom: 0; }
+  .hero-slogan-row {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    white-space: normal;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .hero-slogan-row .hero-slogan  { white-space: normal; }
+  .hero-slogan-row .hero-actions { flex-wrap: wrap; width: 100%; }
+  .hero-actions a, .hero-actions button { flex: 1 1 auto; justify-content: center; text-align: center; }
 }

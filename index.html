@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WIN WINGS – Serving the World Above the Sky</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 
@@ -512,7 +512,7 @@
      Moon is 180° out of phase. Full cycle: 60 seconds.
   ══════════════════════════════════════════════════════════════ */
   (function initSky() {
-    const CYCLE     = 60000;   // ms per full 360° revolution
+    const CYCLE     = 30000;   // ms per full 360° revolution
     const START_DEG = 28;      // begin at nice morning sunrise angle
 
     const canvas    = document.getElementById('skyCanvas');
@@ -570,11 +570,11 @@
       return { x: cx + r * Math.cos(rad), y: cy - r * Math.sin(rad) };
     }
 
-    /* visible: fade in 0°→12°, full 12°→168°, fade out 168°→180° */
+    /* visible: fade in 0°→3°, full 3°→177°, fade out 177°→180° (gap reduced 75%) */
     function bodyOpacity(deg) {
       if (deg <= 0 || deg >= 180) return 0;
-      if (deg < 12)  return (deg)        / 12;
-      if (deg > 168) return (180 - deg)  / 12;
+      if (deg < 3)   return (deg)        / 3;
+      if (deg > 177) return (180 - deg)  / 3;
       return 1;
     }
 
