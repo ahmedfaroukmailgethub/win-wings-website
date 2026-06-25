@@ -1615,10 +1615,25 @@ footer { background: #0f2236; padding: 60px 5% 32px; }
 @keyframes clock-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 @media (max-width: 720px) {
-  .food-clock-wrap { width: 110px; height: 110px; top: 88px; right: 4%; }
-}
-@media (max-width: 720px) {
-  .hero-stats.hero-stats-2 { gap: 28px; }
+  /* Mobile: stack hero vertically so the badge/stats strips flow below the clock animation */
+  .hero { min-height: auto; flex-direction: column; }
+
+  .food-clock-wrap {
+    position: relative; top: auto; right: auto;
+    width: 110px; height: 110px;
+    margin: 88px auto 0;
+  }
+
+  .hero-content { padding-top: 24px; }
+
+  .hero-stats,
+  .hero-stats.hero-stats-2 {
+    position: static; bottom: auto; left: auto; right: auto;
+  }
+
+  .hero-stats.hero-stats-2 {
+    flex-wrap: wrap; gap: 28px; min-height: 0;
+  }
   .cert-badge-inline { height: 64px; }
 }
 .hero-stat { flex: 1; max-width: 200px; text-align: center; padding: 24px 20px; border-right: 1px solid rgba(255,255,255,.1); }
