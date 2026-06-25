@@ -1851,10 +1851,9 @@ footer { background: #0f2236; padding: 60px 5% 32px; }
 
   /* HERO — the slogan + CTA buttons were locked in one non-wrapping row,
      forcing ~780px width and clipping the buttons. Let them stack & wrap.
-     Also give the hero extra height so the top content clears the
-     bottom-anchored badges + stats overlays instead of overlapping them. */
-  .hero { min-height: 116vh; }
-  .hero-content { max-width: 100%; min-width: 0; padding-top: 78px; }
+     (Hero column-stacking, height, padding & static stats are handled by
+     the dedicated mobile hero rules earlier in this breakpoint.) */
+  .hero-content { max-width: 100%; min-width: 0; }
   .hero-eyebrow { margin-bottom: 16px; }
   .hero-title   { font-size: clamp(2.3rem, 12.5vw, 3.4rem); letter-spacing: 2px; margin-bottom: 18px; }
   .hero-slogan  { margin-bottom: 0; }
