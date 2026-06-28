@@ -69,9 +69,11 @@
 </div>
 
 <!-- ═══════════════ WHY CHOOSE US ═══════════════ -->
-<section class="why" id="why" style="min-height: 780px;">
-  <!-- World map animated background (drawn by initWorldMap script) -->
-  <div class="world-bg" aria-hidden="true"></div>
+<section class="why" id="why">
+  <!-- World map animated background (drawn by initWorldMap script on desktop; GIF on mobile) -->
+  <div class="world-bg" aria-hidden="true">
+    <img class="world-gif" src="world-map-mobile.gif" alt="" loading="lazy" decoding="async" />
+  </div>
   <div class="why-inner"></div>
 </section>
 
@@ -344,6 +346,9 @@
 (async function initWorldMap() {
   const bg = document.querySelector('.world-bg');
   if (!bg) return;
+
+  /* On mobile, skip the heavy canvas/D3 animation and use the GIF instead */
+  if (window.matchMedia('(max-width: 720px)').matches) return;
 
   /* create canvas */
   const canvas = document.createElement('canvas');
